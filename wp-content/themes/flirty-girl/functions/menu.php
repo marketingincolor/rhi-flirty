@@ -50,8 +50,10 @@ class Topbar_Menu_Walker extends Walker_Nav_Menu {
         //$slug = $find_slug->post_name;
 
         if( $item->object == 'page' ) {
-            $single_id = get_page_by_title( $item->title );
-            $find_slug = get_post($single_id->ID); 
+            //$single_id = get_page_by_title( $item->title );
+            //$find_slug = get_post($single_id->ID); 
+            $single_id = $item->object_id;
+            $find_slug = get_post($single_id);
             $slug = $find_slug->post_name;
         } elseif( $item->object == 'custom') {
             $slug = $item->post_name;
@@ -89,9 +91,6 @@ class Topbar_Menu_Walker extends Walker_Nav_Menu {
         $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
     }
 
-
-
-
 }
 
 // The Off Canvas Menu
@@ -114,7 +113,7 @@ class Off_Canvas_Menu_Walker extends Walker_Nav_Menu {
     }
 }
 
-// The Footer Menu
+// The Footer Menus
 function joints_footer_links() {
     wp_nav_menu(array(
     	'container' => 'false',                         // Remove nav container
@@ -124,7 +123,29 @@ function joints_footer_links() {
         'depth' => 0,                                   // Limit the depth of the nav
     	'fallback_cb' => ''  							// Fallback function
 	));
-} /* End Footer Menu */
+} 
+
+function joints_footer_links_two() {
+    wp_nav_menu(array(
+        'container' => 'false',                         // Remove nav container
+        'menu' => __( 'Footer Links Two', 'jointswp' ),     // Nav name
+        'menu_class' => 'menu',                         // Adding custom nav class
+        'theme_location' => 'footer-links',             // Where it's located in the theme
+        'depth' => 0,                                   // Limit the depth of the nav
+        'fallback_cb' => ''                             // Fallback function
+    ));
+}
+
+function joints_footer_links_three() {
+    wp_nav_menu(array(
+        'container' => 'false',                         // Remove nav container
+        'menu' => __( 'Footer Links Three', 'jointswp' ),     // Nav name
+        'menu_class' => 'menu',                         // Adding custom nav class
+        'theme_location' => 'footer-links',             // Where it's located in the theme
+        'depth' => 0,                                   // Limit the depth of the nav
+        'fallback_cb' => ''                             // Fallback function
+    ));
+}/* End Footer Menus */
 
 // Header Fallback Menu
 function joints_main_nav_fallback() {

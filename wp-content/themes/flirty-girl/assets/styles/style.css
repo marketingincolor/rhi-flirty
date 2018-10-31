@@ -364,20 +364,16 @@ Red background-color: rgba(195, 6, 108, 1);
 Footer background-color: rgba(47, 46, 46, 1);
  */
 
-body, h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif;
-}
+body, h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; }
+.handwrite { font-family: 'Alex Brush', cursive; }
 
 .grid-container { max-width:64em; }
 .nav-logo { max-width:200px; margin:1em 0em; }
 .footer-logo { max-width:150px; margin:1em 0em 2em; }
 
-.top-bar {
-  background-color: rgba(24, 33, 32, 1);
-  color:#fff;
-  padding:0;
-}
+.top-bar { background-color: rgba(24, 33, 32, 1); color:#fff; padding:0; }
 .top-bar .top-bar-nav { max-width:100%; text-align:center; margin:auto; z-index:1; }
+.top-bar .top-bar-right { text-align:right; }
 .top-bar ul { background-color:transparent; }
 
 .menu .menu-link { font-size:12px; font-weight:bold; text-transform:uppercase; padding:.25em 1em !important; }
@@ -392,44 +388,26 @@ body, h1, h2, h3, h4, h5, h6 {
   background-size:cover !important;
 }
 
-/*.menu-item .icon .icon-home { background: url(../images/nav-icon-home.png); }
-.menu-item .icon .icon-microblading { background: url(../images/nav-icon-micro.png); }
-.menu-item .icon .icon-look-book { background: url(../images/nav-icon-look.png); }
-.menu-item .icon .icon-lash-care { background: url(../images/nav-icon-care.png); }
-.menu-item .icon .icon-press { background: url(../images/nav-icon-press.png); }
-.menu-item .icon .icon-careers { background: url(../images/nav-icon-career.png); }
-.menu-item .icon .icon-faqs {}
-.menu-item .icon .icon-contact { background: url(../images/nav-icon-contact.png); }
-
-.menu-item .icon .icon-home:hover { background: url(../images/nav-icon-home-alt.png); }
-.menu-item .icon .icon-microblading:hover { background: url(../images/nav-icon-micro-alt.png); }
-.menu-item .icon .icon-look-book:hover { background: url(../images/nav-icon-look-alt.png); }
-.menu-item .icon .icon-lash-care:hover { background: url(../images/nav-icon-care-alt.png); }
-.menu-item .icon .icon-press:hover { background: url(../images/nav-icon-press-alt.png); }
-.menu-item .icon .icon-careers:hover { background: url(../images/nav-icon-career-alt.png); }
-.menu-item .icon .icon-faqs:hover {}
-.menu-item .icon .icon-contact:hover { background: url(../images/nav-icon-contact-alt.png); }*/
-
 .menu-item .menu-link .icon-home { background: url(../images/nav-icon-home.png); }
 .menu-item .menu-link .icon-microblading { background: url(../images/nav-icon-micro.png); }
 .menu-item .menu-link .icon-look-book { background: url(../images/nav-icon-look.png); }
 .menu-item .menu-link .icon-lash-care { background: url(../images/nav-icon-care.png); }
+.menu-item .menu-link .icon-locations { background: url(../images/nav-icon-book.png); }
 .menu-item .menu-link .icon-press { background: url(../images/nav-icon-press.png); }
 .menu-item .menu-link .icon-careers { background: url(../images/nav-icon-career.png); }
 .menu-item .menu-link .icon-faqs { background: url(../images/nav-icon-faq.png); }
 .menu-item .menu-link .icon-franchise { background: url(../images/nav-icon-franchise.png); }
 .menu-item .menu-link .icon-contact { background: url(../images/nav-icon-contact.png); }
-
 .menu-item .menu-link:hover .icon-home { background: url(../images/nav-icon-home-alt.png); }
 .menu-item .menu-link:hover .icon-microblading { background: url(../images/nav-icon-micro-alt.png); }
 .menu-item .menu-link:hover .icon-look-book { background: url(../images/nav-icon-look-alt.png); }
 .menu-item .menu-link:hover .icon-lash-care { background: url(../images/nav-icon-care-alt.png); }
+.menu-item .menu-link:hover .icon-locations { background: url(../images/nav-icon-book-alt.png); }
 .menu-item .menu-link:hover .icon-press { background: url(../images/nav-icon-press-alt.png); }
 .menu-item .menu-link:hover .icon-careers { background: url(../images/nav-icon-career-alt.png); }
 .menu-item .menu-link:hover .icon-faqs { background: url(../images/nav-icon-faq-alt.png); }
 .menu-item .menu-link:hover .icon-franchise { background: url(../images/nav-icon-franchise-alt.png); }
 .menu-item .menu-link:hover .icon-contact { background: url(../images/nav-icon-contact-alt.png); }
-
 .menu-item .menu-link { text-align:center; }
 .menu-item .menu-link span {
   display:block;
@@ -439,37 +417,67 @@ body, h1, h2, h3, h4, h5, h6 {
   margin:0 auto 15px auto;
 }
 
+.footer .menu { flex-direction:column; font-size:12px; font-weight:200; text-transform:uppercase; }
+.footer .menu a { color:#FBF3EB; padding:.5em .25em; }
+.footer .menu a:hover { color:#fff; }
+.footer .menu .active>a { background:none; }
 
-.white-bar { 
-  background-color: white; 
-  line-height: 10px; 
-  position: relative; 
-  top: -30px; 
-}
+.off-canvas { background: rgba(24, 33, 32, 1); }
+.off-canvas .menu a { color:#fff; }
+.off-canvas .menu .active>a { background:transparent; color:rgba(195, 6, 108, 1); }
 
-.flirty {
-  background-color: rgba(24, 33, 32, 1);
-  color:#fff;
-}
+.white-bar { background-color: white; line-height: 10px; position: relative; top: 77px; }
+.flirty { background-color: rgba(24, 33, 32, 1); color:#fff; }
+.header { background-color: rgba(24, 33, 32, 1); color:#fff; }
+.header .book-appt-img { /*display:inline; float:right; width:25%; position:relative; top:2px; left:-20px;*/ padding-right:10px; }
+.header .site-social { margin-top:.5em; }
+.header .site-social img { max-height:32px; }
 
-.cta {
-  background-color: rgba(195, 6, 108, 1);
-  color:#fff; 
-}
+.cta { background-color: rgba(195, 6, 108, 1); color:#fff; }
+.cta h2 { font-size:2em; font-weight:400; text-transform:uppercase; letter-spacing:3px; margin:1em 0em; }
+.cta .hour, .cta .locations span { text-transform:uppercase; }
+.cta .locations img { max-width:64px; }
+.footer { background-color: rgba(47, 46, 46, 1); color:#fff; margin-top:0em !important; }
+.footer .mailing { text-align:center; }
+.footer .site-social img { max-height:32px; }
+.footer .copyright { font-weight:200; font-size:12px; }
 
-.cta h2 { 
-  font-size:2em; 
-  font-weight:400; 
-  text-transform:uppercase; 
-  letter-spacing:3px; 
-}
+/* SO STYLES */
+.page-home .entry-content .panel-grid { margin-bottom:60px !important; }
+.page-microblading .entry-content .panel-has-style { margin-bottom:0 !important; }
 
-.footer {
-  background-color: rgba(47, 46, 46, 1);
-  color:#fff; 
-  margin-top:0em !important;
-}
-
+.panel-grid .textwidget .widget-body-h5:before { content:' '; border: 1px inset #fff; box-sizing:border-box; display:block; margin:1em 6em; } 
+.panel-grid .textwidget .widget-body-h5 { font-size:1em; font-weight:200; margin:1em 0em; text-align:center; }
+.panel-grid .textwidget .so-section-name { text-align:center; }
+.so-panel .panel-widget-style .textwidget a, .so-panel .panel-widget-style .textwidget a:hover { color:#fff; }
+.panel-grid .dotted .textwidget { text-align:center; }
+.panel-grid .dotted .textwidget:before {
+  content:" ";
+  display:block;
+  border-style:dotted;
+  border-color:white;
+  border-image-source:url('../images/dots.svg');
+  border-image-slice: 20% 20%;
+  border-image-repeat:round;
+  border-width: 2px 0px 0px 0px;
+  top:25px;
+ position:relative; }
+.panel-grid .dotted .textwidget .so-section-name { display:inline-block; background:rgba(24, 33, 32, 1); padding:0px 10px; position:relative; }
+.bar { background-color: #fff; height: 10px; top: -10px; display: block; position: relative; }
+/*.hour img { margin: 1em; width: calc( 100% - 2em); }*/
+.dot-col { }
+.dot-row { 
+/*width:100%; display:inline-block; height:10px; background:url(../images/smaller-dots.png) center center / auto 50px;*/
+  border-style:dotted;
+  border-color:white;
+  border-image-source:url('../images/dots.svg');
+  border-image-slice: 20% 20%;
+  border-image-repeat:round;
+ }
+ .dot-tb { border-width: 2px 0px 2px 0px; }
+ .dot-l { border-width: 0px 3px 0px 0px; }
+ .dot-hour { margin: 20px 0px; padding: 10px 0px; }
+ .dot-sep { display:inline-block; height:90%; }
 
 .proclaim b {
   position: absolute;
@@ -525,4 +533,27 @@ body, h1, h2, h3, h4, h5, h6 {
     right: 0;
     border-bottom-color: rgba(195, 6, 108, 1);
     border-right-width: 500px;
+}
+
+/* 0 - 640 px */
+@media only screen {
+  .top-bar ul { background-color:transparent; display:block; }
+  .header .logo { text-align:center; }
+}
+
+/* 640 - 1024 px */
+@media only screen and (min-width: 40.063em){
+
+}
+/* 1024 - 1440 px */
+@media only screen and (min-width: 63.063em){
+  .top-bar ul { background-color:transparent; display:flex; }
+}
+/* 1440 - 1920 px */
+@media only screen and (min-width: 90.063em){
+
+}
+/* 1920px > */
+@media only screen and (min-width: 120.063em){
+
 }

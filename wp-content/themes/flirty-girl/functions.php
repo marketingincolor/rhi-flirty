@@ -54,3 +54,13 @@ function gt_add_menu_item_description( $item_output, $item, $depth, $args ) {
 	$desc = __( $item->post_slug ); 
 	return preg_replace('/(<a.*?>[^<]*?)</', '$1' . "<small class=\"nav-desc\">{$desc}</small><", $item_output); 
 }
+
+//Page Slug Body Class
+function add_slug_body_class( $classes ) {
+global $post;
+if ( isset( $post ) ) {
+$classes[] = $post->post_type . '-' . $post->post_name;
+}
+return $classes;
+}
+add_filter( 'body_class', 'add_slug_body_class' );
