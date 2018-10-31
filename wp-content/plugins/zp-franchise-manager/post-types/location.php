@@ -1,24 +1,24 @@
 <?php
-if(!class_exists('Post_Type_Template'))
+if(!class_exists('Location_Post_Type_Template'))
 {
     /**
      * A PostTypeTemplate class that provides additional meta fields
      */
-    class Post_Type_Template
+    class Location_Post_Type_Template
     {
         const POST_TYPE	= "location";
         private $_meta	= array(
-            'meta_a', // address1
-            'meta_b', // address2
-            'meta_c', // city
-            'meta_d', // state
-            'meta_e', // zip
-            'meta_f', // phone
-            'meta_g', // email
-            'meta_h', // hours
-            'meta_i', // suid
-            'meta_j', // mapcode
-            'meta_k', // calcode
+            'loc_meta_address', // address1
+            'loc_meta_address2', // address2
+            'loc_meta_city', // city
+            'loc_meta_state', // state
+            'loc_meta_zip', // zip
+            'loc_meta_phone', // phone
+            'loc_meta_email', // email
+            'loc_meta_hours', // hours
+            'loc_meta_salonlink', // suid
+            'loc_meta_gmap', // mapcode
+            'loc_meta_gcal', // calcode
         );
 
         /**
@@ -145,5 +145,5 @@ if(!class_exists('Post_Type_Template'))
             include(sprintf("%s/../templates/%s_metabox.php", dirname(__FILE__), self::POST_TYPE));
         } // END public function add_inner_meta_boxes($post)
 
-    } // END class Post_Type_Template
-} // END if(!class_exists('Post_Type_Template'))
+    } // END class Location_Post_Type_Template
+} // END if(!class_exists('Location_Post_Type_Template'))

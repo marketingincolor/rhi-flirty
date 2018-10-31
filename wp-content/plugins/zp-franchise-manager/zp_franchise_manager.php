@@ -24,6 +24,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+/*********************************************************************************/
+/**************** Franchise Manager USERROLE removed for FGL site ****************/
+/*********************************************************************************/
+
 if(!class_exists('Franchise_Manager'))
 {
 	class Franchise_Manager
@@ -39,7 +43,7 @@ if(!class_exists('Franchise_Manager'))
 
 			// Register custom post types
 			require_once(sprintf("%s/post-types/location.php", dirname(__FILE__)));
-			$Post_Type_Template = new Post_Type_Template();
+			$Location_Post_Type_Template = new Location_Post_Type_Template();
 
 			$plugin = plugin_basename(__FILE__);
 			add_filter("plugin_action_links_$plugin", array( $this, 'plugin_settings_link' ));
@@ -68,7 +72,7 @@ if(!class_exists('Franchise_Manager'))
                 'create_locations' => true,
                 'delete_locations' => true
 			);
-			add_role('franchisee', 'Franchisee', $new_role);
+			//add_role('franchisee', 'Franchisee', $new_role); /******** REMOVED FOR FGL ********/
 
             $roles_object = new WP_Roles();
             $roles_object->add_cap('administrator', 'edit_franchises');
@@ -90,7 +94,7 @@ if(!class_exists('Franchise_Manager'))
 		public static function deactivate()
 		{
 			/* Remove Role for Franchisees */
-			remove_role('franchisee');
+			//remove_role('franchisee'); /******** REMOVED FOR FGL ********/
 
             $roles_object = new WP_Roles();
             $roles_object->remove_cap('administrator', 'edit_franchises');
@@ -128,6 +132,10 @@ if(class_exists('Franchise_Manager'))
 
 }
 
+/*********************************************************************************/
+/**************** Various Functions below terminated for FGL site ****************/
+/*********************************************************************************/
+
 /**
  * Remove the slug from published post permalinks for Post Type
  */
@@ -139,7 +147,7 @@ function fm_remove_cpt_slug( $post_link, $post ) {
     $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link );
     return $post_link;
 }
-add_filter( 'post_type_link', 'fm_remove_cpt_slug', 10, 2 );
+//add_filter( 'post_type_link', 'fm_remove_cpt_slug', 10, 2 ); /******** REMOVED FOR FGL ********/
 
 /**
  * Bypass request for custom Post Type
@@ -154,7 +162,7 @@ function fm_parse_request_bypass( $query ) {
     if ( ! empty( $query->query['name'] ) )
         $query->set( 'post_type', array( 'post', 'location', 'page' ) );
 }
-//add_action( 'pre_get_posts', 'fm_parse_request_bypass' );
+//add_action( 'pre_get_posts', 'fm_parse_request_bypass' ); /******** REMOVED FOR FGL ********/
 
 
 add_filter( 'map_meta_cap', 'fm_custom_map_meta_cap', 10, 4 );
@@ -195,15 +203,15 @@ function fm_custom_map_meta_cap( $caps, $cap, $user_id, $args ) {
 }
 
 //Add Plugin Specific Meta Fields to User Profile Page
-add_action('show_user_profile', 'fm_user_profile_edit_action');
-add_action('edit_user_profile', 'fm_user_profile_edit_action');
+//add_action('show_user_profile', 'fm_user_profile_edit_action'); /******** REMOVED FOR FGL ********/
+//add_action('edit_user_profile', 'fm_user_profile_edit_action'); /******** REMOVED FOR FGL ********/
 
 function fm_user_profile_edit_action($user) {
     require_once(sprintf("%s/includes/franchise_user_meta.php", dirname(__FILE__)));
 }
 //Allow Update of  Meta Fields on User Profile Page
-add_action( 'personal_options_update', 'fm_save_extra_profile_fields' );
-add_action( 'edit_user_profile_update', 'fm_save_extra_profile_fields' );
+//add_action( 'personal_options_update', 'fm_save_extra_profile_fields' ); /******** REMOVED FOR FGL ********/
+//add_action( 'edit_user_profile_update', 'fm_save_extra_profile_fields' ); /******** REMOVED FOR FGL ********/
 
 function fm_save_extra_profile_fields( $user_id ) {
     if ( !current_user_can( 'edit_user', $user_id ) )
@@ -229,4 +237,61 @@ function admin_del_options() {
     global $_wp_admin_css_colors;
     $_wp_admin_css_colors = 0;
 }
-add_action('admin_head', 'admin_del_options');
+//add_action('admin_head', 'admin_del_options'); /******** REMOVED FOR FGL ********/
+
+
+
+
+/********************************************************************************/
+/**************** Various NEW Functions below added for FGL site ****************/
+/********************************************************************************/
+/**
+ * Remove Custom Meta box from Admin
+ */
+function remove_post_custom_fields() {
+    remove_meta_box( 'postcustom' , 'location' , 'normal' ); 
+}
+add_action( 'admin_menu' , 'remove_post_custom_fields' );
+/**
+ * Add Shortcodes
+ */
+function location_shortcodes_init()
+{
+    // Location Alpha Shortcode - [location-alpha]
+    function location_alpha_shortcode($atts, $content = null)
+    {
+        global $post;
+        $content = get_post_meta($post->ID, 'company_name', true);
+        // always return
+        return $content;
+    }
+    add_shortcode('location-alpha', 'location_alpha_shortcode');
+    // Location Beta Shortcode
+    function location_beta_shortcode($atts, $content = null)
+    {
+        $page_id = get_queried_object_id();
+        $content = get_the_term_list( $page_id, 'types', '<ul class="types"><li>', ',</li><li>', '</li></ul>' );
+        return $content;
+    }
+    add_shortcode('location-beta', 'location_beta_shortcode');
+
+    // Location Type Shortcode
+    function location_type_shortcode($atts, $content = null)
+    {
+        global $post;
+        $term_obj = get_the_terms( $post->ID, 'types' );
+        $term_type = join(', ', wp_list_pluck($term_obj, 'name'));
+        return $term_type;
+    }
+    add_shortcode('location-type', 'location_type_shortcode');
+    // Location Designation Shortcode
+    function location_des_shortcode($atts, $content = null)
+    {
+        global $post;
+        $term_obj = get_the_terms( $post->ID, 'designation' );
+        $term_type = join(', ', wp_list_pluck($term_obj, 'name'));
+        return $term_type;
+    }
+    add_shortcode('location-des', 'location_des_shortcode');
+}
+add_action('init', 'location_shortcodes_init');
