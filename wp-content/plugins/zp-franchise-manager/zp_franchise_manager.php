@@ -54,32 +54,8 @@ if(!class_exists('Franchise_Manager'))
 		 */
 		public static function activate()
 		{
-			/* Create New Role for Franchisees (slightly similar to Author) */
-			$new_role = array(
-			    'delete_posts' => false,
-				'delete_published_posts' => false,
-				'edit_posts' => true,
-				'edit_published_posts' => false,
-				'publish_posts' => false,
-				'read' => true,
-				'upload_files ' => true,
-                'edit_franchises' => true,
-                'manage_franchises' => false,
-                'create_franchises' => true,
-                'delete_franchises' => true,
-                'edit_locations' => true,
-                'manage_locations' => false,
-                'create_locations' => true,
-                'delete_locations' => true
-			);
-			//add_role('franchisee', 'Franchisee', $new_role); /******** REMOVED FOR FGL ********/
 
             $roles_object = new WP_Roles();
-            $roles_object->add_cap('administrator', 'edit_franchises');
-            $roles_object->add_cap('administrator', 'create_franchises');
-            $roles_object->add_cap('administrator', 'manage_franchises');
-            $roles_object->add_cap('administrator', 'delete_franchises');
-            $roles_object->add_cap('administrator', 'read_franchises');
             $roles_object->add_cap('administrator', 'edit_locations');
             $roles_object->add_cap('administrator', 'create_locations');
             $roles_object->add_cap('administrator', 'manage_locations');
@@ -93,15 +69,8 @@ if(!class_exists('Franchise_Manager'))
 		 */
 		public static function deactivate()
 		{
-			/* Remove Role for Franchisees */
-			//remove_role('franchisee'); /******** REMOVED FOR FGL ********/
 
             $roles_object = new WP_Roles();
-            $roles_object->remove_cap('administrator', 'edit_franchises');
-            $roles_object->remove_cap('administrator', 'create_franchises');
-            $roles_object->remove_cap('administrator', 'manage_franchises');
-            $roles_object->remove_cap('administrator', 'delete_franchises');
-            $roles_object->remove_cap('administrator', 'read_franchises');
             $roles_object->remove_cap('administrator', 'edit_locations');
             $roles_object->remove_cap('administrator', 'create_locations');
             $roles_object->remove_cap('administrator', 'manage_locations');
@@ -135,7 +104,6 @@ if(class_exists('Franchise_Manager'))
 /*********************************************************************************/
 /**************** Various Functions below terminated for FGL site ****************/
 /*********************************************************************************/
-
 /**
  * Remove the slug from published post permalinks for Post Type
  */
@@ -163,7 +131,6 @@ function fm_parse_request_bypass( $query ) {
         $query->set( 'post_type', array( 'post', 'location', 'page' ) );
 }
 //add_action( 'pre_get_posts', 'fm_parse_request_bypass' ); /******** REMOVED FOR FGL ********/
-
 
 add_filter( 'map_meta_cap', 'fm_custom_map_meta_cap', 10, 4 );
 function fm_custom_map_meta_cap( $caps, $cap, $user_id, $args ) {
@@ -202,46 +169,6 @@ function fm_custom_map_meta_cap( $caps, $cap, $user_id, $args ) {
     return $caps;
 }
 
-//Add Plugin Specific Meta Fields to User Profile Page
-//add_action('show_user_profile', 'fm_user_profile_edit_action'); /******** REMOVED FOR FGL ********/
-//add_action('edit_user_profile', 'fm_user_profile_edit_action'); /******** REMOVED FOR FGL ********/
-
-function fm_user_profile_edit_action($user) {
-    require_once(sprintf("%s/includes/franchise_user_meta.php", dirname(__FILE__)));
-}
-//Allow Update of  Meta Fields on User Profile Page
-//add_action( 'personal_options_update', 'fm_save_extra_profile_fields' ); /******** REMOVED FOR FGL ********/
-//add_action( 'edit_user_profile_update', 'fm_save_extra_profile_fields' ); /******** REMOVED FOR FGL ********/
-
-function fm_save_extra_profile_fields( $user_id ) {
-    if ( !current_user_can( 'edit_user', $user_id ) )
-        return false;
-    update_user_meta( $user_id, 'location', $_POST['location'] );
-    update_user_meta( $user_id, 'address1', $_POST['address1'] );
-    update_user_meta( $user_id, 'address2', $_POST['address2'] );
-    update_user_meta( $user_id, 'city', $_POST['city'] );
-    update_user_meta( $user_id, 'state', $_POST['state'] );
-    update_user_meta( $user_id, 'zip', $_POST['zip'] );
-    update_user_meta( $user_id, 'phone', $_POST['phone'] );
-    update_user_meta( $user_id, 'zone', $_POST['zone']);
-    update_user_meta( $user_id, 'sm_fb', $_POST['sm_fb'] );
-    update_user_meta( $user_id, 'sm_tw', $_POST['sm_tw'] );
-    update_user_meta( $user_id, 'sm_gp', $_POST['sm_gp'] );
-    update_user_meta( $user_id, 'sm_li', $_POST['sm_li'] );
-    update_user_meta( $user_id, 'st_an', $_POST['st_an'] );
-    update_user_meta( $user_id, 'sp_an', $_POST['sp_an'] );
-}
-
-//Remove Dashboard Profile Options
-function admin_del_options() {
-    global $_wp_admin_css_colors;
-    $_wp_admin_css_colors = 0;
-}
-//add_action('admin_head', 'admin_del_options'); /******** REMOVED FOR FGL ********/
-
-
-
-
 /********************************************************************************/
 /**************** Various NEW Functions below added for FGL site ****************/
 /********************************************************************************/
@@ -275,23 +202,22 @@ function location_shortcodes_init()
     }
     add_shortcode('location-beta', 'location_beta_shortcode');
 
-    // Location Type Shortcode
-    function location_type_shortcode($atts, $content = null)
+    // Location Phone Shortcode - [ location-phone]
+    function location_phone_shortcode($atts, $content = null)
     {
         global $post;
-        $term_obj = get_the_terms( $post->ID, 'types' );
-        $term_type = join(', ', wp_list_pluck($term_obj, 'name'));
-        return $term_type;
+        $location_phone = get_post_meta( $post->ID, 'loc_meta_phone', true );
+        return $location_phone;
     }
-    add_shortcode('location-type', 'location_type_shortcode');
-    // Location Designation Shortcode
-    function location_des_shortcode($atts, $content = null)
+    add_shortcode('location-phone', 'location_phone_shortcode');
+
+    // Location Salon Link Shortcode - [ location-salonlink ]
+    function location_salonlink_shortcode($atts, $content = null)
     {
         global $post;
-        $term_obj = get_the_terms( $post->ID, 'designation' );
-        $term_type = join(', ', wp_list_pluck($term_obj, 'name'));
-        return $term_type;
+        $location_salonlink = get_post_meta( $post->ID, 'loc_meta_salonlink', true );
+        return $location_salonlink;
     }
-    add_shortcode('location-des', 'location_des_shortcode');
+    add_shortcode('location-salonlink', 'location_salonlink_shortcode');
 }
 add_action('init', 'location_shortcodes_init');

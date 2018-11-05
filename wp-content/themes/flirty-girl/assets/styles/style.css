@@ -366,7 +366,8 @@ Footer background-color: rgba(47, 46, 46, 1);
 
 body, h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; }
 .handwrite { font-family: 'Alex Brush', cursive; }
-
+.times { font-family: 'Libre Baskerville'; }
+.pink { color:rgba(195, 6, 108, 1); }
 .grid-container { max-width:64em; }
 .nav-logo { max-width:200px; margin:1em 0em; }
 .footer-logo { max-width:150px; margin:1em 0em 2em; }
@@ -390,7 +391,7 @@ body, h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; }
 
 .menu-item .menu-link .icon-home { background: url(../images/nav-icon-home.png); }
 .menu-item .menu-link .icon-microblading { background: url(../images/nav-icon-micro.png); }
-.menu-item .menu-link .icon-look-book { background: url(../images/nav-icon-look.png); }
+.menu-item .menu-link .icon-lookbook { background: url(../images/nav-icon-look.png); }
 .menu-item .menu-link .icon-lash-care { background: url(../images/nav-icon-care.png); }
 .menu-item .menu-link .icon-locations { background: url(../images/nav-icon-book.png); }
 .menu-item .menu-link .icon-press { background: url(../images/nav-icon-press.png); }
@@ -400,7 +401,7 @@ body, h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; }
 .menu-item .menu-link .icon-contact { background: url(../images/nav-icon-contact.png); }
 .menu-item .menu-link:hover .icon-home { background: url(../images/nav-icon-home-alt.png); }
 .menu-item .menu-link:hover .icon-microblading { background: url(../images/nav-icon-micro-alt.png); }
-.menu-item .menu-link:hover .icon-look-book { background: url(../images/nav-icon-look-alt.png); }
+.menu-item .menu-link:hover .icon-lookbook { background: url(../images/nav-icon-look-alt.png); }
 .menu-item .menu-link:hover .icon-lash-care { background: url(../images/nav-icon-care-alt.png); }
 .menu-item .menu-link:hover .icon-locations { background: url(../images/nav-icon-book-alt.png); }
 .menu-item .menu-link:hover .icon-press { background: url(../images/nav-icon-press-alt.png); }
@@ -417,8 +418,8 @@ body, h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; }
   margin:0 auto 15px auto;
 }
 
-.footer .menu { flex-direction:column; font-size:12px; font-weight:200; text-transform:uppercase; }
-.footer .menu a { color:#FBF3EB; padding:.5em .25em; }
+.footer .menu { flex-direction:column; font-size:12px; font-weight:400; text-transform:uppercase; }
+.footer .menu a { color:#fff; padding:.5em .25em; }
 .footer .menu a:hover { color:#fff; }
 .footer .menu .active>a { background:none; }
 
@@ -441,13 +442,22 @@ body, h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; }
 .footer .mailing { text-align:center; }
 .footer .site-social img { max-height:32px; }
 .footer .copyright { font-weight:200; font-size:12px; }
+.footer .edged { border-right:1px solid #e6e6e6; }
 
 /* SO STYLES */
-.page-home .entry-content .panel-grid { margin-bottom:60px !important; }
+.page-home .entry-content .panel-grid { margin-bottom:60px; }
 .page-microblading .entry-content .panel-has-style { margin-bottom:0 !important; }
+.page-microblading .entry-content .panel-row-style #panel-7-3-0-0 { position:relative; }
+.page-microblading .entry-content .panel-row-style #panel-7-3-0-0 .ribbon-image { position:absolute; top:-120px; }
+.page-lookbook .entry-content .dotted h3 { text-transform:uppercase; }
+.page-lookbook .entry-content .ribbon-image, .page-lookbook .entry-content .ribbon-image-2, .page-lookbook .entry-content .ribbon-image-3 { position:relative; }
+.page-lookbook .entry-content .ribbon-image .so-widget-sow-image { position:absolute; top:-100px; }
+.page-lookbook .entry-content .ribbon-image-2 .so-widget-sow-image { position:absolute; top:-120px; }
+.page-lookbook .entry-content .ribbon-image-3 .so-widget-sow-image { position:absolute; top:-80px; }
+.page-lookbook .entry-content .lashbadge img, .page-menu .entry-content .lashbadge img { max-width:96px; }
 
 .panel-grid .textwidget .widget-body-h5:before { content:' '; border: 1px inset #fff; box-sizing:border-box; display:block; margin:1em 6em; } 
-.panel-grid .textwidget .widget-body-h5 { font-size:1em; font-weight:200; margin:1em 0em; text-align:center; }
+.panel-grid .textwidget .widget-body-h5 { font-size:1em; font-weight:300; margin:1em 0em; text-align:center; }
 .panel-grid .textwidget .so-section-name { text-align:center; }
 .so-panel .panel-widget-style .textwidget a, .so-panel .panel-widget-style .textwidget a:hover { color:#fff; }
 .panel-grid .dotted .textwidget { text-align:center; }
@@ -474,10 +484,43 @@ body, h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; }
   border-image-slice: 20% 20%;
   border-image-repeat:round;
  }
+ .dot-l { border-width: 0px 2px 0px 0px; }
+ .dot-r { border-width: 0px 0px 0px 2px; }
+ .dot-t { border-width: 2px 0px 0px 0px; }
+ .dot-b { border-width: 0px 0px 2px 0px; }
  .dot-tb { border-width: 2px 0px 2px 0px; }
- .dot-l { border-width: 0px 3px 0px 0px; }
+ .dot-lr { border-width: 0px 2px 0px 2px; }
+ .dot-blr { border-width: 0px 2px 2px 2px; }
+ .dot-tblr { border-width: 2px 2px 2px 2px; }
  .dot-hour { margin: 20px 0px; padding: 10px 0px; }
  .dot-sep { display:inline-block; height:90%; }
+
+.page-contact .content .dotted .textwidget:before { top:125px; }
+.page-contact .content .dotted .textwidget h3 { font-size:8em; }
+
+.locations-list .location-meta h4 { margin:0; }
+.locations-list .location-meta h5 { margin:0; }
+.locations-list .location-meta p { margin:0; line-height:1.3; font-size:0.8125em; }
+.locations-list .location-meta .button { 
+  background: url(../images/fgl-banner-pink.png); 
+  background-size:cover; 
+  background-repeat:no-repeat; 
+  background-position:center center; 
+  padding:1em 3em; 
+  float:right;
+}
+
+/* FORM STYLES */
+.flirty .nf-field-label label { font-size:1.125em; color:#fff; font-weight:300; text-transform:uppercase; }
+.flirty .ninja-forms-req-symbol { font-weight:bold; color:#fff; }
+.flirty .nf-field-element input, .flirty .nf-field-element textarea { background:transparent; color:#fff;  }
+.flirty .nf-field-element input[type=button] { border:none; font-size:1.25em; font-weight:300; text-transform:uppercase; float:right; cursor:pointer; }
+
+.flirty-contact form { color:initial; }
+.flirty-contact .nf-field-label label { font-size:1.125em; color:initial; font-weight:300; text-transform:uppercase; }
+.flirty-contact .ninja-forms-req-symbol { font-weight:bold; color:initial; }
+.flirty-contact .nf-field-element input, .flirty-contact .nf-field-element textarea { background:initial; color:initial;  }
+.flirty-contact .nf-field-element input[type=button] { border:none; font-size:1.25em; font-weight:300; text-transform:uppercase; float:right; cursor:pointer; }
 
 .proclaim b {
   position: absolute;

@@ -38,7 +38,7 @@
         <input type="text" id="loc_meta_hours" name="loc_meta_hours" value="<?php echo @get_post_meta($post->ID, 'loc_meta_hours', true); ?>" />
     </li>
     <li>
-        <label for="loc_meta_salonlink">Salon Ultimate ID#</label>
+        <label for="loc_meta_salonlink">Salon Link</label>
         <input type="text" id="loc_meta_salonlink" name="loc_meta_salonlink" value="<?php echo @get_post_meta($post->ID, 'loc_meta_salonlink', true); ?>" />
     </li>
     <li>

@@ -20,12 +20,12 @@
 									<div class="small-12 cell">
 										<img src="<?php echo get_template_directory_uri(); ?>/assets/images/site-logo.png" class="footer-logo">
 									</div>
-									<div class="small-12 medium-4 cell">
+									<div class="small-12 medium-4 cell edged">
 										<nav role="navigation">
 				    						<?php joints_footer_links(); ?>
 				    					</nav>
 									</div>
-									<div class="small-12 medium-4 cell">
+									<div class="small-12 medium-4 cell edged">
 										<nav role="navigation">
 				    						<?php joints_footer_links_two(); ?>
 				    					</nav>

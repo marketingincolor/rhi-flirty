@@ -50,7 +50,7 @@
 									<div class="cell shrink">
 										<?php get_template_part( 'parts/site', 'social' ); ?>
 									</div>
-									<div class="cell small-3 shrink">
+									<div class="cell show-for-medium medium-3 shrink">
 										<a href="<?php echo home_url(); ?>/locations" class="book-appt-link"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/fgl-book-appt.png" class="book-appt-img"></a>
 									</div>
 								</div>
